@@ -1,0 +1,19 @@
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: silly-demo
+  labels:
+    app.kubernetes.io/name: silly-demo
+spec:
+  parentRefs:
+    - kind: Gateway
+      name: contour
+      namespace: projectcontour
+  hostnames:
+    - silly-demo2.212.2.242.27.nip.io
+  rules:
+    - backendRefs:
+        - kind: Service
+          name: silly-demo
+          port: 8080
